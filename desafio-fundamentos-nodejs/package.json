@@ -1,0 +1,17 @@
+{
+  "name": "desafio-fundamentos-nodejs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch src/server.js",
+    "import-csv": "node src/scripts/import-csv.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^5.5.5"
+  }
+}
