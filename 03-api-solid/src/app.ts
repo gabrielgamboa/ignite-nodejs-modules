@@ -14,7 +14,7 @@ app.setErrorHandler((err, request, reply ) => {
     if (env.NODE_ENV !== 'production') {
         console.error(err);
     } else {
-        //todo: add external logs
+        //todo: add external logsssad
     }
 
     return reply.status(500).send({ message: 'Internal Server Error' });
