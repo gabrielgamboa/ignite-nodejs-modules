@@ -16,7 +16,7 @@ describe('RegisterUseCase', () => {
             password: '1234'
         });
 
-        expect(user.id).toBe(expect.any(String))
+        expect(user.id).toEqual(expect.any(String))
 
     })
 
@@ -39,19 +39,16 @@ describe('RegisterUseCase', () => {
         const userRepository = new InMemoryUsersRepository();
         const sut = new RegisterUseCase(userRepository);
 
-        const { user } = await sut.execute({
+        await sut.execute({
             name: 'Test',
             email: 'test@gmail.com',
             password: '1234'
         });
 
-        const promise = sut.execute({
+        await expect(() => sut.execute({
             name: 'Test',
             email: 'test@gmail.com',
             password: '1234'
-        });
-
-        expect(promise).rejects.toThrow();
-        expect(promise).rejects.toBeInstanceOf(UserAlreadyExistsError);
+        })).rejects.toBeInstanceOf(UserAlreadyExistsError);
     })
 })
