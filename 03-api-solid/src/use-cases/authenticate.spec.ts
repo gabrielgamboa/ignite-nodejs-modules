@@ -1,15 +1,21 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
 import { AuthenticateUseCase } from './authenticate';
 import { hash } from 'bcryptjs';
 import { InvalidCredentialsError } from './errors/invalid-credentials-error';
+import { UsersRepository } from '@/repositories/users-repository';
+
+let usersRepository: UsersRepository;
+let sut: AuthenticateUseCase;
 
 describe('AuthenticateUseCase', () => {
-    it('should be able to authenticate user', async () => {
-        const userRepository = new InMemoryUsersRepository();
-        const sut = new AuthenticateUseCase(userRepository);
+    beforeEach(() => {
+        usersRepository = new InMemoryUsersRepository();
+        sut = new AuthenticateUseCase(usersRepository);
+    })
 
-        await userRepository.create({
+    it('should be able to authenticate user', async () => {
+        await usersRepository.create({
             email: 'test@email.com',
             password_hash: await hash('1234', 6),
             name: 'test',
@@ -25,10 +31,7 @@ describe('AuthenticateUseCase', () => {
     });
 
     it('should not be able to authenticate user with invalid email', async () => {
-        const userRepository = new InMemoryUsersRepository();
-        const sut = new AuthenticateUseCase(userRepository);
-
-        await userRepository.create({
+        await usersRepository.create({
             email: 'test@email.com',
             password_hash: await hash('1234', 6),
             name: 'test',
@@ -41,10 +44,7 @@ describe('AuthenticateUseCase', () => {
     });
 
     it('should not be able to authenticate user with invalid password', async () => {
-        const userRepository = new InMemoryUsersRepository();
-        const sut = new AuthenticateUseCase(userRepository);
-
-        await userRepository.create({
+        await usersRepository.create({
             email: 'test@email.com',
             password_hash: await hash('1234', 6),
             name: 'test',
