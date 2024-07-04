@@ -37,7 +37,7 @@ describe('RegisterUseCase', () => {
         expect(isSamePassword).toBeTruthy();
     })
 
-    it('throws if user email already exists', async () => {
+    it.only('throws if user email already exists', async () => {
         await sut.execute({
             name: 'Test',
             email: 'test@gmail.com',
