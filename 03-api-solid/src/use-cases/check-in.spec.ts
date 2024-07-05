@@ -68,6 +68,8 @@ describe('AuthenticateUseCase', () => {
         await sut.execute({
             gymId: 'gym_id',
             userId: 'user_id',
+            userLatitude: 0,
+            userLongitude: 0,
         });
 
         vi.setSystemTime(new Date(2022,0,21,8,0,0))
@@ -75,6 +77,8 @@ describe('AuthenticateUseCase', () => {
         const { checkIn } = await sut.execute({
             gymId: 'gym_id',
             userId: 'user_id',
+            userLatitude: 0,
+            userLongitude: 0,
         });
 
         expect(checkIn.id).toBeDefined();
