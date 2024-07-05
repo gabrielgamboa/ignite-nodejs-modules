@@ -2,15 +2,28 @@ import { CheckInsRepository } from '@/repositories/check-ins-repository';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CheckInUseCase } from './check-in';
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-in-repository';
+import { GymsRepository } from '@/repositories/gyms-repository';
+import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository';
 
 
 let checkInRepository: CheckInsRepository;
+let gymsRepository: GymsRepository;
 let sut: CheckInUseCase;
 
 describe('AuthenticateUseCase', () => {
     beforeEach(() => {
         checkInRepository = new InMemoryCheckInsRepository();
-        sut = new CheckInUseCase(checkInRepository);
+        gymsRepository = new InMemoryGymsRepository();
+        sut = new CheckInUseCase(checkInRepository, gymsRepository);
+
+        gymsRepository.create({
+            id: 'gym_id',
+            title: 'gym-test',
+            description: 'description',
+            latitude: 0,
+            longitude: 0,
+            phone: '12345689',
+        })
 
         vi.useFakeTimers();
     });
@@ -23,6 +36,8 @@ describe('AuthenticateUseCase', () => {
         const { checkIn } = await sut.execute({
             gymId: 'gym_id',
             userId: 'user_id',
+            userLatitude: 0,
+            userLongitude: 0,
         });
 
         expect(checkIn.id).toBeDefined();
@@ -35,11 +50,15 @@ describe('AuthenticateUseCase', () => {
         await sut.execute({
             gymId: 'gym_id',
             userId: 'user_id',
+            userLatitude: 0,
+            userLongitude: 0,
         });
 
         await expect(() => sut.execute({
             gymId: 'gym_id',
             userId: 'user_id',
+            userLatitude: 0,
+            userLongitude: 0,
         })).rejects.toBeInstanceOf(Error)
     });
 
