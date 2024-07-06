@@ -4,18 +4,20 @@ import { ZodError } from "zod";
 import { env } from "./env";
 
 export const app = fastify();
-app.register(appRoutes)
+app.register(appRoutes);
 
-app.setErrorHandler((err, request, reply ) => {
-    if (err instanceof ZodError) {
-        return reply.status(400).send({ message: 'Validation Error', issues: err.format() });
-    }
+app.setErrorHandler((err, request, reply) => {
+  if (err instanceof ZodError) {
+    return reply
+      .status(400)
+      .send({ message: "Validation Error", issues: err.format() });
+  }
 
-    if (env.NODE_ENV !== 'production') {
-        console.error(err);
-    } else {
-        //todo: add external logsssad
-    }
+  if (env.NODE_ENV !== "production") {
+    console.error(err);
+  } else {
+    // todo: add external logsssad
+  }
 
-    return reply.status(500).send({ message: 'Internal Server Error' });
-})
+  return reply.status(500).send({ message: "Internal Server Error" });
+});

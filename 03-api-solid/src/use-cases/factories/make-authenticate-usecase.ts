@@ -2,7 +2,7 @@ import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-user
 import { AuthenticateUseCase } from "../authenticate";
 
 export const makeAuthenticateUseCase = () => {
-    const usersRepository = new InMemoryUsersRepository();
-    const authenticateUseCase = new AuthenticateUseCase(usersRepository);
-    return authenticateUseCase;
-}
+  const usersRepository = new InMemoryUsersRepository();
+  const authenticateUseCase = new AuthenticateUseCase(usersRepository);
+  return authenticateUseCase;
+};

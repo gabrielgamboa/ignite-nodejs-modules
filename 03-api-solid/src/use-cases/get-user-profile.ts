@@ -3,21 +3,21 @@ import { User } from "@prisma/client";
 import { ResourceNotFound } from "./errors/resource-not-found";
 
 interface GetUserProfileUseCaseRequest {
-    userId: string;
+  userId: string;
 }
 
 interface GetUserProfileUseCaseResponse {
-    user: User;
+  user: User;
 }
 
 export class GetUserProfileUseCase {
-    constructor(
-        private readonly usersRepository: UsersRepository,
-    ) {}
+  constructor(private readonly usersRepository: UsersRepository) {}
 
-    async execute({ userId }: GetUserProfileUseCaseRequest): Promise<GetUserProfileUseCaseResponse> {
-        const user = await this.usersRepository.findById(userId);
-        if (!user) throw new ResourceNotFound();
-        return { user };
-    }
+  async execute({
+    userId,
+  }: GetUserProfileUseCaseRequest): Promise<GetUserProfileUseCaseResponse> {
+    const user = await this.usersRepository.findById(userId);
+    if (!user) throw new ResourceNotFound();
+    return { user };
+  }
 }

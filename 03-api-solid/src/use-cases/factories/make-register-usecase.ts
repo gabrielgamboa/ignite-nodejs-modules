@@ -2,7 +2,7 @@ import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-user
 import { RegisterUseCase } from "../register";
 
 export const makeRegisterUseCase = () => {
-    const usersRepository = new InMemoryUsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
-    return registerUseCase;
-}
+  const usersRepository = new InMemoryUsersRepository();
+  const registerUseCase = new RegisterUseCase(usersRepository);
+  return registerUseCase;
+};
