@@ -10,6 +10,6 @@
       }
     ],
     "no-useless-constructor": "off",
-    
+    "camelcase":"off"
   }
 }
