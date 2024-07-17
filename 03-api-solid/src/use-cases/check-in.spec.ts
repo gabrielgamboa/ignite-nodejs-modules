@@ -85,4 +85,13 @@ describe("AuthenticateUseCase", () => {
     expect(checkIn.id).toBeDefined();
     expect(checkIn.id).toEqual(expect.any(String));
   });
+
+  it("should not be able to check in on distant gym", async () => {
+    await expect(() => sut.execute({
+      gymId: "gym_id",
+      userId: "user_id",
+      userLatitude: -22.8171655,
+      userLongitude: -47.3150732,
+    })).rejects.toBeInstanceOf(Error);
+  });
 });
