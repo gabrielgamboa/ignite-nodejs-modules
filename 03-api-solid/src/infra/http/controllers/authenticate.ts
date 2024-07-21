@@ -12,7 +12,7 @@ export async function authenticate(
     password: z.string().min(6),
   });
 
-  const { email, password } = authenticateUserSchema.parse(request.body);
+        const { email, password } = authenticateUserSchema.parse(request.body);
 
   try {
     const authenticateUseCase = makeAuthenticateUseCase();

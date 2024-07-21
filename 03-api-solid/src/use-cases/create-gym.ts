@@ -9,17 +9,21 @@ interface CreateGymUseCaseRequest {
 }
 
 export class CreateGymUseCase {
-  constructor(
-    private readonly gymsRepository: GymsRepository,
-  ) { }
+  constructor(private readonly gymsRepository: GymsRepository) {}
 
-  async execute({ description, latitude, longitude, phone, title }: CreateGymUseCaseRequest) {
+  async execute({
+    description,
+    latitude,
+    longitude,
+    phone,
+    title,
+  }: CreateGymUseCaseRequest) {
     const gym = await this.gymsRepository.create({
       title,
       description,
       phone,
       latitude,
-      longitude
+      longitude,
     });
 
     return { gym };
