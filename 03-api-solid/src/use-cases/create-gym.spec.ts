@@ -1,7 +1,4 @@
-import { CheckInsRepository } from "@/repositories/check-ins-repository";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { CheckInUseCase } from "./check-in";
-import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-in-repository";
+import { beforeEach, describe, expect, it } from "vitest";
 import { GymsRepository } from "@/repositories/gyms-repository";
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository";
 import { CreateGymUseCase } from "./create-gym";
@@ -9,7 +6,7 @@ import { CreateGymUseCase } from "./create-gym";
 let gymsRepository: GymsRepository;
 let sut: CreateGymUseCase;
 
-describe("AuthenticateUseCase", () => {
+describe("CreateGymUseCase", () => {
   beforeEach(() => {
     gymsRepository = new InMemoryGymsRepository();
     sut = new CreateGymUseCase(gymsRepository);

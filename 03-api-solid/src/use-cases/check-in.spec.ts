@@ -11,7 +11,7 @@ let checkInRepository: CheckInsRepository;
 let gymsRepository: GymsRepository;
 let sut: CheckInUseCase;
 
-describe("AuthenticateUseCase", () => {
+describe("CheckInUseCase", () => {
   beforeEach(() => {
     checkInRepository = new InMemoryCheckInsRepository();
     gymsRepository = new InMemoryGymsRepository();
@@ -89,11 +89,13 @@ describe("AuthenticateUseCase", () => {
   });
 
   it("should not be able to check in on distant gym", async () => {
-    await expect(() => sut.execute({
-      gymId: "gym_id",
-      userId: "user_id",
-      userLatitude: -22.8171655,
-      userLongitude: -47.3150732,
-    })).rejects.toBeInstanceOf(MaxDistanceError);
+    await expect(() =>
+      sut.execute({
+        gymId: "gym_id",
+        userId: "user_id",
+        userLatitude: -22.8171655,
+        userLongitude: -47.3150732,
+      })
+    ).rejects.toBeInstanceOf(MaxDistanceError);
   });
 });

@@ -6,7 +6,7 @@ import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-c
 let checkInsRepository: CheckInsRepository;
 let sut: GetUserCheckInsHistoryUseCase;
 
-describe("AuthenticateUseCase", () => {
+describe("GetUserCheckInsHistoryUseCase", () => {
   beforeEach(() => {
     checkInsRepository = new InMemoryCheckInsRepository();
     sut = new GetUserCheckInsHistoryUseCase(checkInsRepository);
