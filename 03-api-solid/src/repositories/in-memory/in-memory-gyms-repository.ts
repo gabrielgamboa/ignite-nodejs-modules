@@ -4,7 +4,7 @@ import { GymsRepository } from "../gyms-repository";
 import { Decimal } from "@prisma/client/runtime/library";
 
 export class InMemoryGymsRepository implements GymsRepository {
-  public users: Gym[] = [];
+  public gyms: Gym[] = [];
 
   async create(data: Prisma.GymCreateInput): Promise<Gym> {
     const user: Gym = {
@@ -16,12 +16,18 @@ export class InMemoryGymsRepository implements GymsRepository {
       longitude: new Decimal(data.longitude as number),
     };
 
-    this.users.push(user);
+    this.gyms.push(user);
     return user;
   }
 
+  async getAll(query: string, page: number): Promise<Gym[]> {
+    return this.gyms
+      .filter((gym) => gym.title.includes(query))
+      .slice((page - 1) * 20, page * 20);
+  }
+
   async findById(id: string): Promise<Gym | null> {
-    const user = this.users.find((user) => user.id === id);
+    const user = this.gyms.find((user) => user.id === id);
     if (!user) return null;
     return user;
   }
