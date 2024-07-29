@@ -11,7 +11,7 @@ export interface GetNearbyGymsUseCaseResponse {
 }
 
 export class GetNearbyGymsUseCase {
-  constructor(private readonly gymsRepository: GymsRepository) { }
+  constructor(private readonly gymsRepository: GymsRepository) {}
 
   async execute({
     userLatitude,
