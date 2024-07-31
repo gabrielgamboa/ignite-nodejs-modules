@@ -2,7 +2,6 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { GetNearbyGymsUseCase } from "./get-nearby-gyms";
 import { GymsRepository } from "@/repositories/gyms-repository";
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository";
-import { title } from "process";
 
 let sut: GetNearbyGymsUseCase;
 let gymsRepository: GymsRepository;
