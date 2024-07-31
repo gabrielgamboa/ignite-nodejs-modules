@@ -4,26 +4,29 @@ import { FindAllNearbyParams, GymsRepository } from "../gyms-repository";
 import { Decimal } from "@prisma/client/runtime/library";
 import { getDistanceBetweenCoordinates } from "@/utils/get-distance-between-coordinates";
 
+const ITEMS_PER_PAGE = 20;
+
 export class InMemoryGymsRepository implements GymsRepository {
   public gyms: Gym[] = [];
 
   async findAllNearby({
     latitude,
     longitude,
+    page,
   }: FindAllNearbyParams): Promise<Gym[]> {
-    return this.gyms.filter((item) => {
-      const distance = getDistanceBetweenCoordinates(
-        { latitude, longitude },
-        {
-          latitude: item.latitude.toNumber(),
-          longitude: item.longitude.toNumber(),
-        }
-      );
+    return this.gyms
+      .filter((item) => {
+        const distance = getDistanceBetweenCoordinates(
+          { latitude, longitude },
+          {
+            latitude: item.latitude.toNumber(),
+            longitude: item.longitude.toNumber(),
+          }
+        );
 
-      console.log(distance);
-
-      return distance < 10; // 10km
-    });
+        return distance < 10; // 10km
+      })
+      .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
   }
 
   async create(data: Prisma.GymCreateInput): Promise<Gym> {
@@ -43,7 +46,7 @@ export class InMemoryGymsRepository implements GymsRepository {
   async getAll(query: string, page: number): Promise<Gym[]> {
     return this.gyms
       .filter((gym) => gym.title.includes(query))
-      .slice((page - 1) * 20, page * 20);
+      .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
   }
 
   async findById(id: string): Promise<Gym | null> {
