@@ -3,6 +3,7 @@ import { ValidateCheckInUseCase } from "@/use-cases/validate-checkin";
 import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-in-repository";
 import { CheckInsRepository } from "@/repositories/check-ins-repository";
 import { ResourceNotFound } from "./errors/resource-not-found";
+import { LateCheckInValidationError } from "./errors/late-checkin-validation-error";
 
 let checkInsRepository: CheckInsRepository;
 let sut: ValidateCheckInUseCase;
@@ -55,6 +56,6 @@ describe("ValidateCheckInUseCase", () => {
       sut.execute({
         checkInId: createdCheckIn.id,
       })
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(LateCheckInValidationError);
   });
 });

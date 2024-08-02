@@ -2,6 +2,7 @@ import { CheckIn } from "@prisma/client";
 import dayjs from "dayjs";
 import { ResourceNotFound } from "./errors/resource-not-found";
 import { CheckInsRepository } from "@/repositories/check-ins-repository";
+import { LateCheckInValidationError } from "./errors/late-checkin-validation-error";
 
 interface ValidateCheckInUseCaseRequest {
   checkInId: string;
@@ -12,7 +13,7 @@ interface ValidateCheckInUseCaseResponse {
 }
 
 export class ValidateCheckInUseCase {
-  constructor(private readonly checkInsRepository: CheckInsRepository) { }
+  constructor(private readonly checkInsRepository: CheckInsRepository) {}
 
   async execute({
     checkInId,
@@ -26,8 +27,7 @@ export class ValidateCheckInUseCase {
       "minutes"
     );
 
-    if (differenceInMinutes > 20) throw new Error();
-
+    if (differenceInMinutes > 20) throw new LateCheckInValidationError();
     checkIn.validated_at = new Date();
 
     await this.checkInsRepository.save(checkIn);
