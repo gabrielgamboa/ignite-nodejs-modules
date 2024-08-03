@@ -2,8 +2,14 @@ import fastify from "fastify";
 import { appRoutes } from "./infra/http/routes";
 import { ZodError } from "zod";
 import { env } from "./env";
+import jwt from "@fastify/jwt";
 
 export const app = fastify();
+
+app.register(jwt, {
+  secret: env.JWT_SECRET,
+});
+
 app.register(appRoutes);
 
 app.setErrorHandler((err, request, reply) => {
