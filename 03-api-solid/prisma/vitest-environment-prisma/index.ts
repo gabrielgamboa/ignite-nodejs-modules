@@ -30,8 +30,6 @@ export default <Environment>{
 
     return {
       async teardown() {
-        execSync("npx prisma migrate deploy"); // apenas roda as migrations, não compara com o schema atual igual "dev"
-
         await prisma.$executeRawUnsafe(
           'DROP SCHEMA IF EXISTS "' + schema + '" CASCADE'
         );

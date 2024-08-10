@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:e2e": "vitest run --dir src/infra/http",
+    "test:e2e:w": "vitest --dir src/infra/http",
     "test": "vitest run --dir /src/use-cases",
     "test:w": "vitest run --dir /src/use-cases",
     "test:coverage": "vitest run --coverage",
