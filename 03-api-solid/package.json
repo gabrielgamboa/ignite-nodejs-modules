@@ -4,10 +4,12 @@
   "description": "GymPass style app.",
   "main": "index.js",
   "scripts": {
-    "test": "vitest run",
-    "test:w": "vitest",
+    "test:e2e": "vitest run --dir src/infra/http",
+    "test": "vitest run --dir /src/use-cases",
+    "test:w": "vitest run --dir /src/use-cases",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui --api 9527",
+    "pretest:e2e": "cd prisma",
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build"
