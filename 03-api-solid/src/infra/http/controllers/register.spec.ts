@@ -1,5 +1,24 @@
-import { expect, test } from "vitest";
+import { it } from "node:test";
+import { expect, describe, afterAll, beforeAll } from "vitest";
+import request from "supertest";
+import { app } from "@/app";
 
-test("should be able to register", async () => {
-  expect(1).toEqual(1);
+describe("Register (e2e)", async () => {
+  beforeAll(async () => {
+    await app.ready();
+  });
+
+  afterAll(async () => {
+    await app.close();
+  });
+
+  it("should be able to register a user", async () => {
+    const response = await request(app.server).post("/users").send({
+      name: "John Doe",
+      email: "XbW9z@example.com",
+      password: "123456",
+    });
+
+    expect(response.statusCode).toEqual(201);
+  });
 });
