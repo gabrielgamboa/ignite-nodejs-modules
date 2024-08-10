@@ -28,7 +28,6 @@ export default <Environment>{
 
     execSync("npx prisma migrate deploy"); // apenas roda as migrations, não compara com o schema atual igual "dev"
 
-    console.log("deu bom");
     return {
       async teardown() {
         execSync("npx prisma migrate deploy"); // apenas roda as migrations, não compara com o schema atual igual "dev"
