@@ -1,5 +1,5 @@
 import fastify from "fastify";
-import { appRoutes } from "./infra/http/routes";
+import { appRoutes } from "./infra/http/routes/routes";
 import { ZodError } from "zod";
 import { env } from "./env";
 import jwt from "@fastify/jwt";
