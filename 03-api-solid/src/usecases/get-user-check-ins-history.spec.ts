@@ -23,7 +23,7 @@ describe("GetUserCheckInsHistoryUseCase", () => {
       gym_id: "gym_id2",
     });
 
-    const checkIns = await sut.execute({ userId: "any_id", page: 1 });
+    const { checkIns } = await sut.execute({ userId: "any_id", page: 1 });
 
     expect(checkIns).toHaveLength(2);
     expect(checkIns).toEqual([
@@ -40,7 +40,7 @@ describe("GetUserCheckInsHistoryUseCase", () => {
       });
     }
 
-    const checkIns = await sut.execute({ userId: "any_id", page: 2 });
+    const { checkIns } = await sut.execute({ userId: "any_id", page: 2 });
 
     expect(checkIns).toHaveLength(2);
     expect(checkIns).toEqual([

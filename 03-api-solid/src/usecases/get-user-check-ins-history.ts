@@ -14,6 +14,6 @@ export class GetUserCheckInsHistoryUseCase {
       page
     );
 
-    return checkIns;
+    return { checkIns };
   }
 }
