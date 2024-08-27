@@ -10,7 +10,7 @@ export async function validateCheckIn(
     checkInId: z.string(),
   });
 
-  const { checkInId } = validateCheckInSchema.parse(request.body);
+  const { checkInId } = validateCheckInSchema.parse(request.params);
 
   const validateCheckInUseCase = makeValidateCheckInUseCase();
   const { checkIn } = await validateCheckInUseCase.execute({

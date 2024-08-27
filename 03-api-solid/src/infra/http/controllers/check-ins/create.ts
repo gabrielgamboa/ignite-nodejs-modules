@@ -2,7 +2,10 @@ import { makeCreateGymUseCase } from "@/usecases/factories/make-create-gym-useca
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function create(request: FastifyRequest, reply: FastifyReply) {
+export async function createCheckIn(
+  request: FastifyRequest,
+  reply: FastifyReply
+) {
   const createCheckInSchema = z.object({
     title: z.string(),
     description: z.string().nullable(),
