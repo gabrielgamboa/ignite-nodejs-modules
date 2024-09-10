@@ -17,5 +17,5 @@ export async function validateCheckIn(
     checkInId,
   });
 
-  return reply.status(200).send({ checkIn });
+  return reply.status(204).send({ checkIn });
 }
