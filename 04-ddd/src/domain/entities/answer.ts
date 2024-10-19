@@ -1,4 +1,5 @@
 import { randomUUID } from "crypto";
+import { Entity } from "../../core/entities/entity";
 
 interface AnswerProps {
   authorId: string
@@ -6,16 +7,13 @@ interface AnswerProps {
   content: string
  }
 
-export class Answer {
-  public id: string;
-  public content: string;
-  public authorId: string;
-  public questionId: string;
-  
+export class Answer extends Entity<AnswerProps> {
+
+  get content() {
+    return this.props.content;
+  }
+
   constructor(props: AnswerProps, id?: string) {
-    this.content = props.content;
-    this.authorId = props.authorId;
-    this.questionId = props.questionId;
-    this.id = id ?? randomUUID();
+    super(props, id); //can be ommited, because we are extending Entity and the constructor is already defined with the same parameters
   }
 }
