@@ -14,4 +14,8 @@ interface QuestionProps {
 }
 
 export class Question extends Entity<QuestionProps> {
+  static create(props: QuestionProps, id?: Id) {
+    const question = new Question(props, id);
+    return question;
+  }
 }

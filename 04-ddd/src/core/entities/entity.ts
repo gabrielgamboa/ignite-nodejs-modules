@@ -9,8 +9,8 @@ export class Entity<Props> {
     return this._id;
   }
 
-  constructor(props: Props, id?: string) {
-    this._id = new Id(id);
+  constructor(props: Props, id?: Id) {
+    this._id = id ?? new Id(id);
     this.props = props;
   }
 }
