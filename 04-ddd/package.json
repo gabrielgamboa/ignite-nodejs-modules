@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@types/node": "^22.7.6",
+    "dayjs": "^1.11.13",
     "typescript": "^5.6.3"
   },
   "devDependencies": {
