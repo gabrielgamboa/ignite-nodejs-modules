@@ -1,5 +1,5 @@
-import { Id } from '../../core/entities/id'
-import { Answer } from '../entities/answer'
+import { Id } from '../../../../core/entities/id'
+import { Answer } from '../../enterprise/entities/answer'
 import { AnswersRepository } from '../repositories/answers-repository'
 
 interface AnswerQuestionUseCaseRequest {
