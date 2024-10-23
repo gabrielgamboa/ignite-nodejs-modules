@@ -1,7 +1,6 @@
-import { expect, test } from 'vitest';
 import { AnswerQuestionUseCase } from './answer-question';
 import { AnswersRepository } from '../repositories/answers-repository';
-import { Answer } from '../entities/answer';
+import { Answer } from '@/domain/entities/answer';
 
 const fakeAnswersRepository: AnswersRepository = {
   create: function (answer: Answer): Promise<void> {
