@@ -7,9 +7,9 @@ import dayjs from 'dayjs'
 interface QuestionProps {
   title: string
   content: string
-  authorId: string
+  authorId: Id
   slug: Slug
-  bestAnswerId: Id
+  bestAnswerId?: Id
   createdAt: Date
   updatedAt?: Date
 }
@@ -31,7 +31,7 @@ export class Question extends Entity<QuestionProps> {
     return this.props.slug
   }
 
-  get bestAnswerId() {
+  get bestAnswerId(): Id | undefined {
     return this.props.bestAnswerId
   }
 
