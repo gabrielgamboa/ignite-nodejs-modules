@@ -1,5 +1,13 @@
 export class Slug {
-  constructor(readonly value: string) {}
+  public readonly value: string;
+
+  constructor(value: string) {
+    this.value = value;
+  }
+
+  static create(value: string) {
+    return new Slug(value);
+  }
 
   static createFromText(text: string): Slug {
     const slugText = text
