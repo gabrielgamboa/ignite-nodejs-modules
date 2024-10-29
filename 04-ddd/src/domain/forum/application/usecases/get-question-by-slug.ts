@@ -10,7 +10,6 @@ interface GetQuestionBySlugUseCaseResponse {
 }
 
 export class GetQuestionBySlugUseCase {
-
   constructor(
     private readonly questionsRepository: QuestionsRepository
   ) {}

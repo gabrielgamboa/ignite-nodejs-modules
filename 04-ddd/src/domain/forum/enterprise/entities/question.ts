@@ -4,7 +4,7 @@ import { Id } from '@/core/entities/id'
 import { Optional } from '@/core/types/optional'
 import dayjs from 'dayjs'
 
-interface QuestionProps {
+export interface QuestionProps {
   title: string
   content: string
   authorId: Id
