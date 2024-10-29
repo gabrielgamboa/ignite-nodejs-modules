@@ -1,23 +1,23 @@
-import { AnswerQuestionUseCase } from './answer-question'
-import { AnswersRepository } from '../repositories/answers-repository'
-import { InMemoryAnswersRepository } from 'test/repositories/answers-repository'
+import { AnswerQuestionUseCase } from "./answer-question";
+import { AnswersRepository } from "../repositories/answers-repository";
+import { InMemoryAnswersRepository } from "test/repositories/answers-repository";
 
-let inMemoryAnswersRepository: AnswersRepository
-let sut: AnswerQuestionUseCase
+let inMemoryAnswersRepository: AnswersRepository;
+let sut: AnswerQuestionUseCase;
 
-describe('Create Answer', () => {
+describe("Create Answer", () => {
   beforeEach(() => {
-    inMemoryAnswersRepository = new InMemoryAnswersRepository()
-    sut = new AnswerQuestionUseCase(inMemoryAnswersRepository)
-  })
+    inMemoryAnswersRepository = new InMemoryAnswersRepository();
+    sut = new AnswerQuestionUseCase(inMemoryAnswersRepository);
+  });
 
-  it('create an answer', async () => {
+  it("create an answer", async () => {
     const response = await sut.execute({
-      content: 'Nova Resposta',
-      questionId: '1',
-      instructorId: '1',
-    })
+      content: "Nova Resposta",
+      questionId: "1",
+      instructorId: "1",
+    });
 
-    expect(response.content).toEqual('Nova Resposta')
-  })
-})
+    expect(response.content).toEqual("Nova Resposta");
+  });
+});

@@ -1,24 +1,24 @@
-import { InMemoryQuestionsRepository } from 'test/repositories/questions-repository'
-import { QuestionsRepository } from '../repositories/questions-repository'
-import { CreateQuestionUseCase } from './create-question'
+import { InMemoryQuestionsRepository } from "test/repositories/questions-repository";
+import { QuestionsRepository } from "../repositories/questions-repository";
+import { CreateQuestionUseCase } from "./create-question";
 
-let inMemoryQuestionsRepository: QuestionsRepository
-let sut: CreateQuestionUseCase
+let inMemoryQuestionsRepository: QuestionsRepository;
+let sut: CreateQuestionUseCase;
 
-describe('Create Question', () => {
+describe("Create Question", () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
-    sut = new CreateQuestionUseCase(inMemoryQuestionsRepository)
-  })
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
+    sut = new CreateQuestionUseCase(inMemoryQuestionsRepository);
+  });
 
-  it('should be able to create a question', async () => {
+  it("should be able to create a question", async () => {
     const { question } = await sut.execute({
-      title: 'Nova Pergunta',
-      content: 'Nova Resposta',
-      authorId: '1',
-    })
+      title: "Nova Pergunta",
+      content: "Nova Resposta",
+      authorId: "1",
+    });
 
-    expect(question.id).toBeTruthy()
-    expect(question.slug.value).toEqual('nova-pergunta')
-  })
-})
+    expect(question.id).toBeTruthy();
+    expect(question.slug.value).toEqual("nova-pergunta");
+  });
+});
