@@ -13,7 +13,7 @@ interface CreateQuestionUseCaseResponse {
 }
 
 export class CreateQuestionUseCase {
-  constructor(private readonly questionsRepository: QuestionsRepository) {}
+  constructor(private readonly questionsRepository: QuestionsRepository) { }
 
   async execute({
     authorId,
