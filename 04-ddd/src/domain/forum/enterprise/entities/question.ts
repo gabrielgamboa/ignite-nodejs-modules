@@ -47,12 +47,8 @@ export class Question extends Entity<QuestionProps> {
     return this.content.substring(0, 120).trimEnd().concat("...");
   }
 
-  private touch() {
-    this.props.updatedAt = new Date();
-  }
-
   set content(content: string) {
-    this.content = content;
+    this.props.content = content;
     this.touch();
   }
 
@@ -69,6 +65,10 @@ export class Question extends Entity<QuestionProps> {
 
   get isNew() {
     return dayjs().diff(this.createdAt, "days") <= 3;
+  }
+
+  private touch() {
+    this.props.updatedAt = new Date();
   }
 
   static create(props: Optional<QuestionProps, "createdAt" | "slug">, id?: Id) {
