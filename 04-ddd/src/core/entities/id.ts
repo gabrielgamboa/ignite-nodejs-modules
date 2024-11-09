@@ -1,17 +1,17 @@
 import { randomUUID } from "node:crypto";
 
 export class Id {
-  private _id: string;
+  private value: string;
 
   toValue() {
-    return this._id;
+    return this.value;
   }
 
   toString() {
-    return this._id;
+    return this.value;
   }
 
   constructor(id?: string) {
-    this._id = id ?? randomUUID();
+    this.value = id ?? randomUUID();
   }
 }
