@@ -1,0 +1,34 @@
+import { Entity } from "@/core/entities/entity";
+import { Id } from "@/core/entities/id";
+import { Optional } from "@/core/types/optional";
+
+export interface CommentProps {
+  authorId: Id;
+  content: string;
+  createdAt: Date;
+  updatedAt?: Date;
+}
+
+export abstract class Comment<T extends CommentProps> extends Entity<T> {
+
+  get authorId() {
+    return this.props.authorId;
+  }
+
+  get createdAt() {
+    return this.props.createdAt
+  }
+
+  get updatedAt() {
+    return this.props.updatedAt
+  }
+
+  private touch() {
+    this.props.updatedAt = new Date();
+  }
+
+  set content(content: string) {
+    this.props.content = content;
+    this.touch();
+  }
+}
