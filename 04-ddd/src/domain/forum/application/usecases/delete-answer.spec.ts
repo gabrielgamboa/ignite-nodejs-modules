@@ -1,4 +1,4 @@
-import { InMemoryAnswersRepository } from "test/repositories/answers-repository";
+import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository";
 import { DeleteAnswerUseCase } from "./delete-answer";
 import { Id } from "@/core/entities/id";
 import { makeAnswer } from "test/factories/make-answer";

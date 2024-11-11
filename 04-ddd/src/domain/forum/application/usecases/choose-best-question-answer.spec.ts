@@ -1,7 +1,7 @@
-import { InMemoryAnswersRepository } from "test/repositories/answers-repository";
+import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository";
 import { Id } from "@/core/entities/id";
 import { makeAnswer } from "test/factories/make-answer";
-import { InMemoryQuestionsRepository } from "test/repositories/questions-repository";
+import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questions-repository";
 import { ChooseBestQuestionAnswerUseCase } from "./choose-best-question-answer";
 import { makeQuestion } from "test/factories/make-question";
 

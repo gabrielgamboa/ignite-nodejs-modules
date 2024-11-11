@@ -1,6 +1,6 @@
 import { AnswerQuestionUseCase } from "./answer-question";
 import { AnswersRepository } from "../repositories/answers-repository";
-import { InMemoryAnswersRepository } from "test/repositories/answers-repository";
+import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository";
 
 let inMemoryAnswersRepository: AnswersRepository;
 let sut: AnswerQuestionUseCase;

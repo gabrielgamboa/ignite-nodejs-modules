@@ -1,6 +1,6 @@
-import { InMemoryQuestionsRepository } from "test/repositories/questions-repository";
+import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questions-repository";
 import { CommentOnQuestionUseCase } from "./comment-on-question";
-import { InMemoryQuestionsCommentsRepository } from "test/repositories/questions-comments-repository";
+import { InMemoryQuestionsCommentsRepository } from "test/repositories/in-memory-questions-comments-repository";
 import { makeQuestion } from "test/factories/make-question";
 import { Id } from "@/core/entities/id";
 
@@ -8,7 +8,7 @@ let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let inMemoryQuestionsCommentsRepository: InMemoryQuestionsCommentsRepository;
 let sut: CommentOnQuestionUseCase;
 
-describe("Create Question", () => {
+describe("Comment on Question", () => {
   beforeEach(() => {
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
     inMemoryQuestionsCommentsRepository = new InMemoryQuestionsCommentsRepository();
