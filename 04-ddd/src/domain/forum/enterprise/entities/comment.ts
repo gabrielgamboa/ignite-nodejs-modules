@@ -23,6 +23,10 @@ export abstract class Comment<T extends CommentProps> extends Entity<T> {
     return this.props.updatedAt
   }
 
+  get content() {
+    return this.props.content;
+  }
+
   private touch() {
     this.props.updatedAt = new Date();
   }
