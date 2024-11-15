@@ -6,11 +6,11 @@ export class Left<L, R> {
     this.value = value;
   }
 
-  isLeft(): this is Left<L, R> {
+  isLeft(): this is Left<L, R> { //assim que chamar a função isLeft, o objeto irá ser do tipo Left, tendo o tipo de value alterado para L
     return true;
   }
 
-  isRight(): this is Right<L, R> {
+  isRight(): this is Right<L, R> { //assim que chamar a função isLeft, o objeto irá ser do tipo Right, tendo o tipo de value alterado para R
     return false;
   }
 }
