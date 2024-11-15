@@ -8,8 +8,8 @@ interface DeleteAnswerCommentUseCaseRequest {
   authorId: string;
 }
 
-
 type DeleteAnswerCommentUseCaseResponse = Either<ResourceNotFoundError | NotAllowedError, {}>
+
 export class DeleteAnswerCommentUseCase {
   constructor(private answercommentsRepository: AnswersCommentsRepository) { }
 

@@ -2,7 +2,7 @@ import { AnswerQuestionUseCase } from "./answer-question";
 import { AnswersRepository } from "../repositories/answers-repository";
 import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository";
 
-let inMemoryAnswersRepository: AnswersRepository;
+let inMemoryAnswersRepository: InMemoryAnswersRepository;
 let sut: AnswerQuestionUseCase;
 
 describe("Create Answer", () => {
@@ -18,6 +18,7 @@ describe("Create Answer", () => {
       instructorId: "1",
     });
 
-    expect(response.content).toEqual("Nova Resposta");
+    expect(response.isRight()).toBe(true);
+    expect(inMemoryAnswersRepository.items[0]).toEqual(response.value?.answer);
   });
 });

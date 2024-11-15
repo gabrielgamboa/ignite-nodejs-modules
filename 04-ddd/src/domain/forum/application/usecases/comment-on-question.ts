@@ -2,6 +2,8 @@ import { Id } from "@/core/entities/id";
 import { QuestionComment } from "../../enterprise/entities/question-comment";
 import { QuestionsRepository } from "../repositories/questions-repository";
 import { QuestionsCommentsRepository } from "../repositories/questions-comments-repository";
+import { Either, right } from "@/core/either";
+import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
 interface CommentOnQuestionUseCaseRequest {
   questionId: string;
@@ -9,9 +11,9 @@ interface CommentOnQuestionUseCaseRequest {
   content: string;
 }
 
-interface CommentOnQuestionUseCaseResponse {
+type CommentOnQuestionUseCaseResponse = Either<ResourceNotFoundError, {
   questionComment: QuestionComment;
-}
+}>
 
 export class CommentOnQuestionUseCase {
   constructor(
@@ -36,7 +38,7 @@ export class CommentOnQuestionUseCase {
 
     await this.questionsCommentsRepository.create(questionComment);
 
-    return { questionComment };
+    return right({ questionComment })
 
   }
 }
