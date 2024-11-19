@@ -2,7 +2,7 @@ import { Id } from "@/core/entities/id";
 import { QuestionComment } from "../../enterprise/entities/question-comment";
 import { QuestionsRepository } from "../repositories/questions-repository";
 import { QuestionsCommentsRepository } from "../repositories/questions-comments-repository";
-import { Either, right } from "@/core/either";
+import { Either, left, right } from "@/core/either";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
 interface CommentOnQuestionUseCaseRequest {
@@ -28,7 +28,7 @@ export class CommentOnQuestionUseCase {
   }: CommentOnQuestionUseCaseRequest): Promise<CommentOnQuestionUseCaseResponse> {
     const question = await this.questionsRepository.findById(questionId);
 
-    if (!question) throw new Error("Question not found.");
+    if (!question) return left(new ResourceNotFoundError());
 
     const questionComment = QuestionComment.create({
       authorId: new Id(authorId),

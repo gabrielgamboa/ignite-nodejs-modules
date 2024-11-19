@@ -2,6 +2,7 @@ import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-r
 import { CommentOnAnswerUseCase } from "./comment-on-answer";
 import { makeAnswer } from "test/factories/make-answer";
 import { InMemoryAnswersCommentsRepository } from "test/repositories/in-memory-answers-comments-repository";
+import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository;
 let inMemoryAnswersCommentsRepository: InMemoryAnswersCommentsRepository;
@@ -29,10 +30,14 @@ describe("Commnet on Answer", () => {
   });
 
   it("should not be able to comment on answer if answer does not exists", async () => {
-    expect(async () => await sut.execute({
+    const result = await sut.execute({
       authorId: 'author-id-from-comment',
       content: 'Example content',
       answerId: 'any-id',
-    })).rejects.toThrowError()
+    });
+
+
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toBeInstanceOf(ResourceNotFoundError);
   });
 });

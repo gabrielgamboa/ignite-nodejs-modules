@@ -3,6 +3,7 @@ import { CommentOnQuestionUseCase } from "./comment-on-question";
 import { InMemoryQuestionsCommentsRepository } from "test/repositories/in-memory-questions-comments-repository";
 import { makeQuestion } from "test/factories/make-question";
 import { Id } from "@/core/entities/id";
+import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let inMemoryQuestionsCommentsRepository: InMemoryQuestionsCommentsRepository;
@@ -30,10 +31,13 @@ describe("Comment on Question", () => {
   });
 
   it("should not be able to comment on question if question does not exists", async () => {
-    expect(async () => await sut.execute({
+    const response = await sut.execute({
       authorId: 'author-id-from-comment',
       content: 'Example content',
       questionId: 'any-id',
-    })).rejects.toThrowError()
+    });
+
+    expect(response.isLeft()).toBeTruthy();
+    expect(response.value).toBeInstanceOf(ResourceNotFoundError)
   });
 });

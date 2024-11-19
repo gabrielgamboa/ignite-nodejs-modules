@@ -2,6 +2,7 @@ import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questio
 import { makeQuestion } from "test/factories/make-question";
 import { Id } from "@/core/entities/id";
 import { EditQuestionUseCase } from "./edit-question";
+import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let sut: EditQuestionUseCase;
@@ -36,14 +37,15 @@ describe("Edit Question", () => {
   });
 
   it("should not be able to delete a question if question does not exists", async () => {
-    expect(async () => {
-      await sut.execute({
-        authorId: "1",
-        questionId: "id",
-        title: "Example title",
-        content: "Example content",
-      });
-    }).rejects.toBeInstanceOf(Error);
+    const response = await sut.execute({
+      authorId: "1",
+      questionId: "id",
+      title: "Example title",
+      content: "Example content",
+    });
+
+    expect(response.isLeft()).toBeTruthy();
+    expect(response.value).toBeInstanceOf(ResourceNotFoundError);
   });
 
   it("should not be able to delete a question if author does not match ", async () => {
@@ -56,13 +58,14 @@ describe("Edit Question", () => {
       ),
     );
 
-    expect(async () => {
-      await sut.execute({
-        authorId: "12",
-        questionId: "id",
-        title: "Example title",
-        content: "Example content",
-      });
-    }).rejects.toBeInstanceOf(Error);
+    const response = await sut.execute({
+      authorId: "12",
+      questionId: "id",
+      title: "Example title",
+      content: "Example content",
+    });
+
+    expect(response.isLeft()).toBeTruthy();
+    expect(response.value).toBeInstanceOf(ResourceNotFoundError);
   });
 });

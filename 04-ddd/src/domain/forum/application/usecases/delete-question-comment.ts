@@ -22,7 +22,7 @@ export class DeleteQuestionCommentUseCase {
     if (!questioncomment) return left(new ResourceNotFoundError())
 
     if (questioncomment.authorId.toString() !== authorId) {
-      return right(new NotAllowedError())
+      return left(new NotAllowedError())
     }
 
     await this.questioncommentsRepository.delete(questioncomment);
