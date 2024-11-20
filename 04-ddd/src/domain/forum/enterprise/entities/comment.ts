@@ -1,6 +1,5 @@
 import { Entity } from "@/core/entities/entity";
 import { Id } from "@/core/entities/id";
-import { Optional } from "@/core/types/optional";
 
 export interface CommentProps {
   authorId: Id;

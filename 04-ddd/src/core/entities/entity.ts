@@ -1,6 +1,6 @@
 import { Id } from "./id";
 
-export class Entity<Props> {
+export abstract class Entity<Props> {
   private _id: Id;
   protected props: Props; // protected allows to just access it from the class that extends Entity
 
