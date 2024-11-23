@@ -35,8 +35,8 @@ describe("Create Question", () => {
 
     expect(response.isRight()).toBeTruthy();
     expect(response.value?.question.id).toBeTruthy();
-    expect(response.value?.question.attachments).toHaveLength(2)
-    expect(response.value?.question.attachments).toEqual([
+    expect(response.value?.question.attachments.currentItems).toHaveLength(2)
+    expect(response.value?.question.attachments.currentItems).toEqual([
       expect.objectContaining({ attachmentId: new Id('1') }),
       expect.objectContaining({ attachmentId: new Id('2') }),
     ])
