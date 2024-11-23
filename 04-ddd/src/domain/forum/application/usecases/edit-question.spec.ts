@@ -12,8 +12,8 @@ let sut: EditQuestionUseCase;
 
 describe("Edit Question", () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
     inMemoryQuestionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(inMemoryQuestionAttachmentsRepository);
     sut = new EditQuestionUseCase(inMemoryQuestionsRepository, inMemoryQuestionAttachmentsRepository);
   });
 
@@ -73,8 +73,6 @@ describe("Edit Question", () => {
       title: "Example title",
       content: "Example content",
     });
-
-    console.log(inMemoryQuestionsRepository.items[0].attachments.currentItems)
 
     expect(inMemoryQuestionsRepository.items[0].attachments.currentItems).toHaveLength(2);
     expect(inMemoryQuestionsRepository.items[0].attachments.currentItems).toEqual([

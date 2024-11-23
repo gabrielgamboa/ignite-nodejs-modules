@@ -2,17 +2,19 @@ import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questio
 import { CommentOnQuestionUseCase } from "./comment-on-question";
 import { InMemoryQuestionsCommentsRepository } from "test/repositories/in-memory-questions-comments-repository";
 import { makeQuestion } from "test/factories/make-question";
-import { Id } from "@/core/entities/id";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
+import { InMemoryQuestionAttachmentsRepository } from "test/repositories/in-memory-question-attachments-repository";
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let inMemoryQuestionsCommentsRepository: InMemoryQuestionsCommentsRepository;
+let inMemoryQuestionsAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
 let sut: CommentOnQuestionUseCase;
 
 describe("Comment on Question", () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
     inMemoryQuestionsCommentsRepository = new InMemoryQuestionsCommentsRepository();
+    inMemoryQuestionsAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(inMemoryQuestionsAttachmentsRepository);
     sut = new CommentOnQuestionUseCase(inMemoryQuestionsRepository, inMemoryQuestionsCommentsRepository);
   });
 
