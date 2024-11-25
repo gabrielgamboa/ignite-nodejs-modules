@@ -3,10 +3,10 @@ import { Id } from "@/core/entities/id";
 import { Optional } from "@/core/types/optional";
 
 interface NotificationProps {
-  recipientId: string;
+  recipientId: Id;
   title: string;
   content: string;
-  readAt: Date;
+  readAt?: Date;
   createdAt: Date;
 }
 
