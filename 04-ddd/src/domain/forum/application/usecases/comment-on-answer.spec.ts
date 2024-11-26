@@ -2,7 +2,7 @@ import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-r
 import { CommentOnAnswerUseCase } from "./comment-on-answer";
 import { makeAnswer } from "test/factories/make-answer";
 import { InMemoryAnswersCommentsRepository } from "test/repositories/in-memory-answers-comments-repository";
-import { ResourceNotFoundError } from "./errors/resource-not-found-error";
+import { ResourceNotFoundError } from "../../../../core/errors/resource-not-found-error";
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository;
 let inMemoryAnswersCommentsRepository: InMemoryAnswersCommentsRepository;

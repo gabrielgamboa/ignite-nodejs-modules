@@ -2,8 +2,8 @@ import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-r
 import { DeleteAnswerUseCase } from "./delete-answer";
 import { Id } from "@/core/entities/id";
 import { makeAnswer } from "test/factories/make-answer";
-import { ResourceNotFoundError } from "./errors/resource-not-found-error";
-import { NotAllowedError } from "./errors/not-allowed-error";
+import { ResourceNotFoundError } from "../../../../core/errors/resource-not-found-error";
+import { NotAllowedError } from "../../../../core/errors/not-allowed-error";
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository;
 let sut: DeleteAnswerUseCase;
