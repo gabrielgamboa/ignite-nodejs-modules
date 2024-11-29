@@ -1,5 +1,4 @@
 import { InMemoryNotificationsRepository } from "test/repositories/in-memory-notifications-repository";
-import { CreateNotificationUseCase } from "./create-notification"
 import { ReadNotificationUseCase } from "./read-notification";
 import { makeNotification } from "test/factories/make-notification";
 import { Id } from "@/core/entities/id";

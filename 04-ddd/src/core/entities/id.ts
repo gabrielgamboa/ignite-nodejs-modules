@@ -14,4 +14,8 @@ export class Id {
   constructor(id?: string) {
     this.value = id ?? randomUUID();
   }
+
+  equals(id: Id) {
+    return this.toValue() === id.toValue();
+  }
 }
