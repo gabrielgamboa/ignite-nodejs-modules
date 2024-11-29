@@ -3,14 +3,17 @@ import { CommentOnAnswerUseCase } from "./comment-on-answer";
 import { makeAnswer } from "test/factories/make-answer";
 import { InMemoryAnswersCommentsRepository } from "test/repositories/in-memory-answers-comments-repository";
 import { ResourceNotFoundError } from "../../../../core/errors/resource-not-found-error";
+import { InMemoryAnswerAttachmentsRepository } from "test/repositories/in-memory-answers-attachments-repository";
 
+let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let inMemoryAnswersRepository: InMemoryAnswersRepository;
 let inMemoryAnswersCommentsRepository: InMemoryAnswersCommentsRepository;
 let sut: CommentOnAnswerUseCase;
 
 describe("Commnet on Answer", () => {
   beforeEach(() => {
-    inMemoryAnswersRepository = new InMemoryAnswersRepository();
+    inMemoryAnswerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
+    inMemoryAnswersRepository = new InMemoryAnswersRepository(inMemoryAnswerAttachmentsRepository);
     inMemoryAnswersCommentsRepository = new InMemoryAnswersCommentsRepository();
     sut = new CommentOnAnswerUseCase(inMemoryAnswersRepository, inMemoryAnswersCommentsRepository);
   });

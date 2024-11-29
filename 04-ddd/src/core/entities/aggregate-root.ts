@@ -9,7 +9,7 @@ export abstract class AggregateRoot<T> extends Entity<T> {
     return this._domainEvents;
   }
 
-  //pré disparar os eventos(anota que o evento existe)
+  //pré disparar os eventos(anota que o evento existe, mas não está pronto para o subscriber ouvir)
   protected addDomainEvent(domainEvent: DomainEvent): void {
     this._domainEvents.push(domainEvent);
     DomainEvents.markAggregateForDispatch(this);

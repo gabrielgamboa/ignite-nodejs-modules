@@ -32,7 +32,8 @@ describe("Delete Question", () => {
       questionId: "question-1",
     });
 
-    expect(inMemoryQuestionsRepository.items).toHaveLength(0);
+    expect(inMemoryQuestionsRepository.items).toHaveLength(0)
+    expect(inMemoryQuestionAttachmentsRepository.items).toHaveLength(0);
   });
 
   it("should not be able to delete a question if question does not exists", async () => {
