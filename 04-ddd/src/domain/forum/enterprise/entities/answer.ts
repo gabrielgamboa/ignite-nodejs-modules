@@ -2,7 +2,7 @@ import { Id } from "@/core/entities/id";
 import { Optional } from "@/core/types/optional";
 import { AnswerAttachmentList } from "./answer-attachment-list";
 import { AggregateRoot } from "@/core/entities/aggregate-root";
-import { AnswerCreatedEvent } from "../events/answer-created";
+import { AnswerCreatedEvent } from "../events/answer-created-event";
 
 export interface AnswerProps {
   authorId: Id;
