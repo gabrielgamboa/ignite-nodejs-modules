@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
 import { Env } from "src/env";
+import { JwtStrategy } from "./jwt.strategy";
 
 @Module({
   imports: [JwtModule.registerAsync({
@@ -17,7 +18,8 @@ import { Env } from "src/env";
         privateKey: Buffer.from(privateKey, 'base64'),
       }
     }
-  })]
+  })],
+  providers: [JwtStrategy]
 })
 export class AuthModule {
 
