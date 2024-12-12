@@ -1,11 +1,11 @@
 import { PrismaService } from "../prisma/prisma.service";
 import { AppModule } from "../app.module";
 import { INestApplication } from "@nestjs/common";
-import { Test } from '@nestjs/testing';
-import request from 'supertest';
+import { Test } from "@nestjs/testing";
+import request from "supertest";
 import { JwtService } from "@nestjs/jwt";
 
-describe('Create Question (E2E)', () => {
+describe("Create Question (E2E)", () => {
   let app: INestApplication;
   let prisma: PrismaService;
   let jwt: JwtService;
@@ -22,13 +22,13 @@ describe('Create Question (E2E)', () => {
     await app.init();
   });
 
-  test('[POST] /questions', async () => {
+  test("[POST] /questions", async () => {
     const user = await prisma.user.create({
       data: {
-        email: 'gabriel@example.com',
-        name: 'Gabriel',
-        password: '123123',
-      }
+        email: "gabriel@example.com",
+        name: "Gabriel",
+        password: "123123",
+      },
     });
 
     await prisma.question.createMany({
@@ -37,28 +37,28 @@ describe('Create Question (E2E)', () => {
           authorId: user.id,
           title: "New question 1",
           content: "New content",
-          slug: "new-question-1"
+          slug: "new-question-1",
         },
         {
           authorId: user.id,
           title: "New question 2",
           content: "New content",
-          slug: "new-question-2"
+          slug: "new-question-2",
         },
         {
           authorId: user.id,
           title: "New question 3",
           content: "New content",
-          slug: "new-question-3"
+          slug: "new-question-3",
         },
-      ]
-    })
+      ],
+    });
 
     const token = jwt.sign({ sub: user.id });
 
     const response = await request(app.getHttpServer())
-      .get('/questions')
-      .set('Authorization', `Bearer ${token}`)
+      .get("/questions")
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(200);
 
@@ -68,7 +68,7 @@ describe('Create Question (E2E)', () => {
         expect.objectContaining({ title: "New question 1" }),
         expect.objectContaining({ title: "New question 2" }),
         expect.objectContaining({ title: "New question 3" }),
-      ]
+      ],
     });
   });
-})
+});

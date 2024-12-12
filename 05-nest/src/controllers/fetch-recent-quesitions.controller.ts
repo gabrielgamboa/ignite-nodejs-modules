@@ -4,34 +4,32 @@ import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod";
 
-const pageQueryParamSchema = z.string().default('1').transform(Number).pipe(z.number().min(1));
+const pageQueryParamSchema = z
+  .string()
+  .default("1")
+  .transform(Number)
+  .pipe(z.number().min(1));
 const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema);
 
-type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>
+type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>;
 
-
-@Controller('/questions')
+@Controller("/questions")
 export class FetchRecentQuestionsController {
-  constructor(
-    private readonly prismaService: PrismaService,
-  ) { }
-
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async handle(
-    @Query('page', queryValidationPipe) page: PageQueryParamSchema,
-  ) {
+  async handle(@Query("page", queryValidationPipe) page: PageQueryParamSchema) {
     const perPage = 20;
 
     const questions = await this.prismaService.question.findMany({
       take: perPage,
       skip: (page - 1) * perPage,
       orderBy: {
-        createdAt: 'desc'
-      }
+        createdAt: "desc",
+      },
     });
 
-    return { questions }
+    return { questions };
   }
 }
