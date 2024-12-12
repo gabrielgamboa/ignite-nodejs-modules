@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UnauthorizedException, UsePipes } from "@nestjs/common";
+import { Body, Controller, HttpCode, Post, UnauthorizedException, UsePipes } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { compare } from 'bcryptjs';
 import { z } from 'zod';
@@ -22,6 +22,7 @@ export class AuthenticateController {
 
 
   @Post()
+  @HttpCode(200)
   @UsePipes(new ZodValidationPipe(authenticateBodySchema))
   async handle(@Body() data: AuthenticateBodySchema) {
     const { email, password } = data;
