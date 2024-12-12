@@ -31,22 +31,44 @@ describe('Create Question (E2E)', () => {
       }
     });
 
+    await prisma.question.createMany({
+      data: [
+        {
+          authorId: user.id,
+          title: "New question 1",
+          content: "New content",
+          slug: "new-question-1"
+        },
+        {
+          authorId: user.id,
+          title: "New question 2",
+          content: "New content",
+          slug: "new-question-2"
+        },
+        {
+          authorId: user.id,
+          title: "New question 3",
+          content: "New content",
+          slug: "new-question-3"
+        },
+      ]
+    })
+
     const token = jwt.sign({ sub: user.id });
 
     const response = await request(app.getHttpServer())
-      .post('/questions')
+      .get('/questions')
       .set('Authorization', `Bearer ${token}`)
-      .send({
-        title: 'New question',
-        content: 'New content from question',
-      });
 
-    expect(response.statusCode).toBe(201);
+    expect(response.statusCode).toBe(200);
 
-    const questionOnDatabase = await prisma.question.findFirst({
-      where: { title: 'New question' }
+    expect(response.body.questions).toHaveLength(3);
+    expect(response.body).toEqual({
+      questions: [
+        expect.objectContaining({ title: "New question 1" }),
+        expect.objectContaining({ title: "New question 2" }),
+        expect.objectContaining({ title: "New question 3" }),
+      ]
     });
-
-    expect(questionOnDatabase).toBeTruthy();
   });
 })
