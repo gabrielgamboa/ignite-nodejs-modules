@@ -23,4 +23,4 @@ import { Env } from "../env";
   ],
   providers: [JwtStrategy],
 })
-export class AuthModule { }
+export class AuthModule {}

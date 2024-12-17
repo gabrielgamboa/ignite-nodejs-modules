@@ -24,7 +24,7 @@ export class AuthenticateController {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
   @Post()
   @HttpCode(200)

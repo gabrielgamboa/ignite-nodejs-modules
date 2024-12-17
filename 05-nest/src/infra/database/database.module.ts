@@ -28,4 +28,4 @@ import { PrismaAnswersAttachmentsRepository } from "./prisma/repositories/prisma
     PrismaAnswersAttachmentsRepository,
   ],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

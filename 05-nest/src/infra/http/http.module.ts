@@ -16,4 +16,4 @@ import { DatabaseModule } from "../database/database.module";
   ],
   providers: [PrismaService],
 })
-export class HttpModule { }
+export class HttpModule {}

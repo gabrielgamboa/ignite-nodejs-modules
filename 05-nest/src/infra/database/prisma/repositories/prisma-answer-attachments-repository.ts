@@ -4,7 +4,8 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class PrismaAnswersAttachmentsRepository
-  implements AnswerAttachmentsRepository {
+  implements AnswerAttachmentsRepository
+{
   findManyByAnswerId(answerId: string): Promise<AnswerAttachment[]> {
     throw new Error("Method not implemented.");
   }
