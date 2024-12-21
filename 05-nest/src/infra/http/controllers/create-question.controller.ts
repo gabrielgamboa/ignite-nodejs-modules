@@ -3,7 +3,6 @@ import { CurrentUser } from "@/infra/auth/current-user-decorator";
 import { JwtAuthGuard } from "@/infra/auth/jwt-auth-guard";
 import { UserPayload } from "@/infra/auth/jwt.strategy";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
 import { z } from "zod";
 import { CreateQuestionUseCase } from "@/domain/forum/application/usecases/create-question";
 
