@@ -5,6 +5,7 @@ import { UserPayload } from "@/infra/auth/jwt.strategy";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe";
 import { PrismaService } from "@/infra/database/prisma/prisma.service";
 import { z } from "zod";
+import { CreateQuestionUseCase } from "@/domain/forum/application/usecases/create-question";
 
 const createQuestionBodySchema = z.object({
   title: z.string(),
@@ -18,7 +19,7 @@ const bodyValidationPipe = new ZodValidationPipe(createQuestionBodySchema);
 @Controller("/questions")
 @UseGuards(JwtAuthGuard)
 export class CreateQuestionController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly createQuestionUseCase: CreateQuestionUseCase) { }
 
   @Post()
   async handle(
@@ -28,24 +29,11 @@ export class CreateQuestionController {
     const { content, title } = body;
     const userId = user.sub;
 
-    const slug = this.convertToSlug(title);
-
-    await this.prismaService.question.create({
-      data: {
-        title,
-        content,
-        slug,
-        authorId: userId,
-      },
+    await this.createQuestionUseCase.execute({
+      authorId: userId,
+      content,
+      title,
+      attachmentsIds: [],
     });
-  }
-
-  private convertToSlug(title: string): string {
-    return title
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u836f]/g, "")
-      .replace(/[^\w\s-]/g, "")
-      .replace(/\s+/g, "-");
   }
 }
