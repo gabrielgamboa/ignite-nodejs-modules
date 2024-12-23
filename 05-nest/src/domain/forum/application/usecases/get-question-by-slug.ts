@@ -15,7 +15,7 @@ type GetQuestionBySlugUseCaseResponse = Either<
 >;
 
 export class GetQuestionBySlugUseCase {
-  constructor(private readonly questionsRepository: QuestionsRepository) {}
+  constructor(private readonly questionsRepository: QuestionsRepository) { }
 
   async execute({
     slug,

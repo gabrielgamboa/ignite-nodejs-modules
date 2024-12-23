@@ -1,7 +1,7 @@
-import { Id } from "@/core/entities/id";
 import { RegisterStudentUseCase } from "./register-student";
 import { FakeHasher } from "test/cryptography/fake-hasher";
 import { InMemoryStudentsRepository } from "test/repositories/in-memory-students-repository";
+import { StudentAlreadyExistsError } from "./errors/student-already-exists-error";
 
 let inMemoryStudentsRepository: InMemoryStudentsRepository;
 let fakeHasher: FakeHasher;
@@ -22,24 +22,22 @@ describe("Register Student", () => {
     });
 
     expect(response.isRight()).toBeTruthy();
-    // expect(response.value?.id).toBeTruthy();
-    // expect(response.value?.question.slug.value).toEqual("nova-pergunta");
   });
 
-  // it("should not be able to register a student if email already registered", async () => {
-  //   const response = await sut.execute({
-  //     title: "Nova Pergunta",
-  //     content: "Nova Resposta",
-  //     authorId: "1",
-  //     attachmentsIds: ["1", "2"],
-  //   });
+  it("should not be able to register a student if email already registered", async () => {
+    await sut.execute({
+      email: "fake-email@gmail.com",
+      name: "Gabriel",
+      password: "123456",
+    });
 
-  //   expect(response.isRight()).toBeTruthy();
-  //   expect(response.value?.question.id).toBeTruthy();
-  //   expect(response.value?.question.attachments.currentItems).toHaveLength(2);
-  //   expect(response.value?.question.attachments.currentItems).toEqual([
-  //     expect.objectContaining({ attachmentId: new Id("1") }),
-  //     expect.objectContaining({ attachmentId: new Id("2") }),
-  //   ]);
-  // });
+    const response = await sut.execute({
+      email: "fake-email@gmail.com",
+      name: "Gabriel",
+      password: "123456",
+    });
+
+    expect(response.isLeft()).toBeTruthy();
+    expect(response.value).toBeInstanceOf(StudentAlreadyExistsError);
+  });
 });

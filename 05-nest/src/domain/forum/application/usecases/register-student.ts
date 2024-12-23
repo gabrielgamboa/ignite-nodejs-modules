@@ -34,7 +34,7 @@ export class RegisterStudentUseCase {
     const studentAlreadyExists = await this.studentsRepository.findByEmail(email);
 
     if (studentAlreadyExists) {
-      return left(new StudentAlreadyExistsError(email)); //return left
+      return left(new StudentAlreadyExistsError(email));
     }
 
     const hashedPassword = await this.hashGenerator.hash(password);

@@ -10,6 +10,7 @@ import { PrismaService } from "@/infra/database/prisma/prisma.service";
 import { hash } from "bcryptjs";
 import { z } from "zod";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe";
+import { RegisterStudentUseCase } from "@/domain/forum/application/usecases/register-student";
 
 const createAccountBodySchema = z.object({
   name: z.string(),
@@ -21,7 +22,7 @@ type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>;
 
 @Controller("/accounts")
 export class CreateAccountController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly registerStudentUseCase: RegisterStudentUseCase) { }
 
   @Post()
   @HttpCode(201)
@@ -29,20 +30,10 @@ export class CreateAccountController {
   async handle(@Body() data: CreateAccountBodySchema) {
     const { name, email, password } = data;
 
-    const userWithSameEmail = await this.prismaService.user.findUnique({
-      where: { email },
-    });
-
-    if (userWithSameEmail) {
-      throw new ConflictException(
-        "User with same email address already exists",
-      );
-    }
-
-    const hashedPassword = await hash(password, 8);
-
-    await this.prismaService.user.create({
-      data: { name, email, password: hashedPassword },
+    await this.registerStudentUseCase.execute({
+      email,
+      name,
+      password,
     });
   }
 }
