@@ -3,14 +3,10 @@ import {
   Controller,
   HttpCode,
   Post,
-  UnauthorizedException,
   UsePipes,
 } from "@nestjs/common";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
-import { compare } from "bcryptjs";
 import { z } from "zod";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe";
-import { JwtService } from "@nestjs/jwt";
 import { AuthenticateStudentUseCase } from "@/domain/forum/application/usecases/authenticate-student";
 
 const authenticateBodySchema = z.object({
@@ -39,7 +35,7 @@ export class AuthenticateController {
 
     if (result.isRight()) {
       return {
-        access_token: result.value.access_token,
+        access_token: result.value.accessToken,
       }
     }
   }

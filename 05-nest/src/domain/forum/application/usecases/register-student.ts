@@ -45,8 +45,6 @@ export class RegisterStudentUseCase {
       password: hashedPassword,
     })
 
-    console.log(student);
-
     await this.studentsRepository.create(student);
 
     return right({ student })

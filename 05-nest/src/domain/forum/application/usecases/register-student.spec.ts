@@ -22,6 +22,11 @@ describe("Register Student", () => {
     });
 
     expect(response.isRight()).toBeTruthy();
+    expect(response.value).toEqual({
+      student: expect.objectContaining({
+        email: "fake-email@gmail.com"
+      })
+    });
   });
 
   it("should not be able to register a student if email already registered", async () => {
