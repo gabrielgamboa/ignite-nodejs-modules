@@ -1,9 +1,6 @@
 import { Either, left, right } from "@/core/either";
-import { Student } from "../../enterprise/entities/student";
 import { Injectable } from "@nestjs/common";
 import { StudentsRepository } from "../repositories/students-repository";
-import { StudentAlreadyExistsError } from "./errors/student-already-exists-error";
-import { HashGenerator } from "../cryptography/hash-generator";
 import { HashComparer } from "../cryptography/hash-comparer";
 import { Encrypter } from "../cryptography/encrypter";
 import { WrongCredentialsError } from "./errors/wrong-credentials-error";

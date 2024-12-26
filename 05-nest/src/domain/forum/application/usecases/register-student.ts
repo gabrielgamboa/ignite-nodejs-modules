@@ -33,6 +33,8 @@ export class RegisterStudentUseCase {
   }: RegisterStudentUseCaseRequest): Promise<RegisterStudentUseCaseResponse> {
     const studentAlreadyExists = await this.studentsRepository.findByEmail(email);
 
+    console.log(studentAlreadyExists);
+
     if (studentAlreadyExists) {
       return left(new StudentAlreadyExistsError(email));
     }

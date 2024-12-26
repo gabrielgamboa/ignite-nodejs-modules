@@ -30,10 +30,14 @@ export class CreateAccountController {
   async handle(@Body() data: CreateAccountBodySchema) {
     const { name, email, password } = data;
 
-    await this.registerStudentUseCase.execute({
+    const result = await this.registerStudentUseCase.execute({
       email,
       name,
       password,
     });
+
+    if (result.isLeft()) {
+      throw new Error('vsf');
+    }
   }
 }
